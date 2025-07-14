@@ -59,16 +59,20 @@ def is_within_campus(lat1, lon1):
 def home():
     now = datetime.now()
     qr_text, expiry_time = load_qr_data()
+    
+    # ✅ Always define img_path
+    img_path = os.path.join(QR_FOLDER, 'today_qr.png')
 
     if not qr_text or now > expiry_time:
         qr_text = str(uuid.uuid4())
         expiry_time = now + timedelta(minutes=15)
+
         img = qrcode.make(qr_text)
-        img_path = os.path.join(QR_FOLDER, 'today_qr.png')
         img.save(img_path)
         save_qr_data(qr_text, expiry_time)
 
     return render_template('index.html', qr_path='/' + img_path)
+
 
 @app.route('/show-qr')
 def show_qr():
