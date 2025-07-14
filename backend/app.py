@@ -24,8 +24,21 @@ client = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
 QR_FOLDER = 'static/qr_codes'
 os.makedirs(QR_FOLDER, exist_ok=True)
 
-active_qr_data = None
-expiry_time = None
+
+QR_FILE = 'qr_data.txt'
+def save_qr_data(qr_text, expiry):
+    with open(QR_FILE, 'w') as f:
+        f.write(f"{qr_text},{expiry.isoformat()}")
+
+def load_qr_data():
+    if not os.path.exists(QR_FILE):
+        return None, None
+    with open(QR_FILE, 'r') as f:
+        qr_text, expiry_str = f.read().strip().split(',')
+        return qr_text, datetime.fromisoformat(expiry_str)
+
+# active_qr_data = None
+# expiry_time = None
 
 #  Check Location
 def is_within_campus(lat1, lon1):
@@ -44,20 +57,19 @@ def is_within_campus(lat1, lon1):
 
 @app.route('/')
 def home():
-    return redirect('/admin-login')
-    global active_qr_data, expiry_time
-
     now = datetime.now()
-    img_path = os.path.join(QR_FOLDER, 'today_qr.png')
-    if not active_qr_data or now > expiry_time:
-        active_qr_data = str(uuid.uuid4())
-        expiry_time = now + timedelta(minutes=15)
+    qr_text, expiry_time = load_qr_data()
 
-        img = qrcode.make(active_qr_data)
+    if not qr_text or now > expiry_time:
+        qr_text = str(uuid.uuid4())
+        expiry_time = now + timedelta(minutes=15)
+        img = qrcode.make(qr_text)
         img_path = os.path.join(QR_FOLDER, 'today_qr.png')
         img.save(img_path)
+        save_qr_data(qr_text, expiry_time)
 
     return render_template('index.html', qr_path='/' + img_path)
+
 @app.route('/show-qr')
 def show_qr():
     if not session.get('logged_in') or session.get('role') != 'teacher':
@@ -117,7 +129,8 @@ def submit_attendance():
     now = datetime.now()
 
     # Validate QR
-    if scanned_qr != active_qr_data or now > expiry_time:
+    qr_text, expiry_time = load_qr_data()
+    if scanned_qr != qr_text or now > expiry_time:
         return {"status": "failed", "reason": "Invalid or expired QR"}
 
     # Validate location
