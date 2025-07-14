@@ -51,7 +51,7 @@ def home():
     img_path = os.path.join(QR_FOLDER, 'today_qr.png')
     if not active_qr_data or now > expiry_time:
         active_qr_data = str(uuid.uuid4())
-        expiry_time = now + timedelta(minutes=1)
+        expiry_time = now + timedelta(minutes=15)
 
         img = qrcode.make(active_qr_data)
         img_path = os.path.join(QR_FOLDER, 'today_qr.png')
@@ -69,7 +69,7 @@ def show_qr():
 
     if not active_qr_data or now > expiry_time:
         active_qr_data = str(uuid.uuid4())
-        expiry_time = now + timedelta(minutes=5)  #QR expiry time
+        expiry_time = now + timedelta(minutes=15)  #QR expiry time
         img = qrcode.make(active_qr_data)
         img.save(img_path)
 
