@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Student Login - QR Attendance</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .login-box {
+        background: #fff;
+        padding: 30px 40px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 320px;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+        color: #007bff;
+      }
+
+      input {
+        width: 90%;
+        padding: 10px;
+        margin-top: 10px;
+        font-size: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin-top: 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .error {
+        color: red;
+        margin-top: 15px;
+      }
+
+      .back-link {
+        margin-top: 20px;
+        display: block;
+        font-size: 14px;
+        color: #007bff;
+        text-decoration: none;
+      }
+
+      .back-link:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-box">
+      <h2>🎓 Student Login</h2>
+      <form method="POST" action="/student-login">
+        <input
+          type="text"
+          name="username"
+          placeholder="Student ID"
+          required
+        /><br />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+        /><br />
+        <button type="submit">Login</button>
+      </form>
+      {% if error %}
+      <div class="error">{{ error }}</div>
+      {% endif %}
+      <a class="back-link" href="/admin-login">⬅️ Back to Main Login</a>
+    </div>
+  </body>
+</html>

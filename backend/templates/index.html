@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QR Attendance - Teacher View</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f8f9fa;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      img {
+        width: 300px;
+        height: 300px;
+        border: 3px solid #007bff;
+        border-radius: 10px;
+        margin: 20px 0;
+        background: white;
+        padding: 10px;
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      p {
+        color: #555;
+        font-size: 16px;
+        max-width: 80%;
+      }
+
+      .btn-home {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+
+      .btn-home:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Today's Attendance QR Code</h1>
+    <img src="{{ qr_path }}" alt="Today's QR Code" />
+    <p>
+      This QR is valid for 15 minutes only. Please display it on the classroom
+      screen.
+    </p>
+    <a href="/teacher-dashboard" class="btn-home">⬅️ Back to Dashboard</a>
+
+    <!-- <a href="/admin" class="btn-home">⬅️ Back to Home</a> -->
+  </body>
+</html>

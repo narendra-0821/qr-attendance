@@ -1,0 +1,141 @@
+/* <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+```) */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f6f9;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.container {
+  max-width: 500px;
+  margin: 60px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #005f73;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 90%;
+  padding: 12px;
+  margin: 12px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+}
+
+button {
+  padding: 12px 20px;
+  background-color: #0a9396;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #007f83;
+}
+
+img.qr {
+  width: 250px;
+  height: 250px;
+  margin: 20px auto;
+  display: block;
+  border: 2px dashed #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.toast {
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.toast.success {
+  background-color: #d8f3dc;
+  color: #2d6a4f;
+  border: 1px solid #95d5b2;
+}
+
+.toast.error {
+  background-color: #fde2e2;
+  color: #b00020;
+  border: 1px solid #fca5a5;
+}
+
+.footer {
+  margin-top: 40px;
+  font-size: 13px;
+  color: #888;
+}
+
+.map-container {
+  height: 300px;
+  margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+
+/* html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f8f9fa;
+} */
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.qr-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.qr {
+  width: 250px;
+  height: 250px;
+  border: 3px solid #007bff;
+  border-radius: 10px;
+  margin: 20px auto;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.hidden {
+  display: none;
+}

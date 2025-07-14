@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Teacher Dashboard - QR Attendance</title>
+    <!-- Optional: auto-refresh every 30s -->
+    <!-- <meta http-equiv="refresh" content="30"> -->
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+        text-align: center;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      body.dark-mode {
+        background-color: #1e1e1e;
+        color: #e0e0e0;
+      }
+
+      header {
+        background-color: #007bff;
+        color: white;
+        padding: 20px 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      h1 {
+        margin: 0;
+      }
+
+      .theme-toggle {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        background: #ffc107;
+        color: #000;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .container {
+        margin: 40px auto;
+        max-width: 800px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .card {
+        background-color: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+      }
+
+      body.dark-mode .card {
+        background-color: #2c2c2c;
+        color: #e0e0e0;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+      }
+
+      .card h2 {
+        margin: 0 0 10px;
+      }
+
+      .card p {
+        color: #666;
+      }
+
+      body.dark-mode .card p {
+        color: #bbb;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+      }
+
+      .btn:hover {
+        background-color: #0056b3;
+      }
+
+      footer {
+        margin-top: 60px;
+        padding: 10px;
+        font-size: 14px;
+        color: #888;
+      }
+
+      body.dark-mode footer {
+        color: #aaa;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to Teacher Dashboard</h1>
+      <button class="theme-toggle" onclick="toggleTheme()">
+        🌓 Toggle Theme
+      </button>
+    </header>
+
+    <div class="container">
+      <div class="card">
+        <h2>Today's QR Code</h2>
+        <p>Generate and display the QR code for today's attendance.</p>
+        <a href="/show-qr" class="btn">📷 Show QR Code</a>
+      </div>
+
+      <div class="card">
+        <h2>Attendance Records</h2>
+        <p>View and manage all attendance logs.</p>
+        <a href="/view-attendance" class="btn">📊 View Attendance</a>
+      </div>
+
+      <div class="card">
+        <h2>Download Excel</h2>
+        <p>Download all attendance records as Excel.</p>
+        <a href="/download_attendance" class="btn">⬇️ Download All</a>
+      </div>
+
+      <div class="card">
+        <h2>Logout</h2>
+        <p>End current admin session securely.</p>
+        <a href="/admin-login" class="btn">🚪 Logout</a>
+      </div>
+    </div>
+
+    <footer>Made by ECE | QR Attendance System © 2025</footer>
+
+    <script>
+      function toggleTheme() {
+        document.body.classList.toggle("dark-mode");
+      }
+    </script>
+  </body>
+</html>

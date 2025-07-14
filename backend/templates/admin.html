@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin Dashboard - Attendance</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+      }
+
+      h2 {
+        color: #343a40;
+        margin-bottom: 10px;
+      }
+
+      a {
+        text-decoration: none;
+        color: #007bff;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 15px;
+        border-radius: 5px;
+        text-align: center;
+        background-color: #28a745;
+        color: white;
+        margin-bottom: 20px;
+      }
+
+      .btn:hover {
+        background-color: #218838;
+      }
+
+      .table-responsive {
+        overflow-x: auto;
+        margin-top: 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #dee2e6;
+        text-align: center;
+      }
+
+      th {
+        background-color: #007bff;
+        color: white;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      p {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>📊 Admin Dashboard - Attendance Records</h2>
+    <p><a href="/teacher-dashboard" class="btn">⬅️ Back to Dashboard</a></p>
+
+    <a href="/download_attendance" class="btn"
+      >⬇️ Download All Attendance (Excel)</a
+    >
+
+    <div class="table-responsive">{{ table | safe }}</div>
+  </body>
+</html>

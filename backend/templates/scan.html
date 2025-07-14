@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QR Attendance - Student Scan</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        max-width: 400px;
+        margin: auto;
+        text-align: center;
+      }
+
+      #qr-reader {
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      input {
+        padding: 10px;
+        margin-top: 10px;
+        width: 100%;
+      }
+
+      #status {
+        font-weight: bold;
+        margin-top: 15px;
+      }
+
+      .logout-btn {
+        display: inline-block;
+        margin-top: 30px;
+        background-color: #dc3545;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      .logout-btn:hover {
+        background-color: #c82333;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>👋 Welcome, {{ name }}</h3>
+    <h2>Student QR Attendance</h2>
+    <input
+      type="text"
+      id="studentName"
+      value="{{ name }}"
+      readonly
+      style="background-color: #e9ecef; cursor: not-allowed"
+    />
+
+    <!-- <input type="text" id="studentName" placeholder="Enter your name" /> -->
+
+    <div id="qr-reader"></div>
+    <p id="status"></p>
+
+    <a href="/logout-student" class="logout-btn">🚪 Logout</a>
+
+    <script>
+      let scannedQR = null;
+      let locationData = null;
+
+      function showStatus(message, type = "info") {
+        const status = document.getElementById("status");
+        status.innerText = message;
+        status.style.color =
+          type === "success"
+            ? "green"
+            : type === "error"
+            ? "red"
+            : type === "warning"
+            ? "orange"
+            : "blue";
+      }
+
+      function onScanSuccess(decodedText, decodedResult) {
+        if (scannedQR) return;
+
+        scannedQR = decodedText;
+        showStatus("✅ QR scanned! Getting your location...");
+
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            locationData = {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            };
+            showStatus("📍 Location received. Sending attendance...");
+            submitAttendance();
+          },
+          function (error) {
+            showStatus("❌ Location error: " + error.message, "error");
+          }
+        );
+      }
+
+      function submitAttendance() {
+        const name = document.getElementById("studentName").value;
+        if (!name) {
+          showStatus("⚠️ Please enter your name before scanning.", "warning");
+          return;
+        }
+
+        fetch("/submit_attendance", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: name,
+            qr: scannedQR,
+            latitude: locationData.latitude,
+            longitude: locationData.longitude,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.status === "success") {
+              showStatus("✅ Attendance submitted successfully!", "success");
+            } else {
+              showStatus("❌ Error: " + data.reason, "error");
+            }
+          })
+          .catch(() => {
+            showStatus("❌ Network error. Please try again.", "error");
+          });
+      }
+
+      let html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {
+        fps: 10,
+        qrbox: 250,
+      });
+      html5QrcodeScanner.render(onScanSuccess);
+    </script>
+  </body>
+</html>
