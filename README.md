@@ -115,20 +115,6 @@ Add the required environment variables and database configuration, if applicable
 npm start
 ```
 
-## 📸 Screenshots
-
-Add screenshots of your actual application here.
-
-| Application Interface | Attendance Interface |
-|---|---|
-| Add screenshot here | Add screenshot here |
-
-Example:
-
-```markdown
-![Home Page](screenshots/home.png)
-![Attendance Page](screenshots/attendance.png)
-```
 
 ## 🧠 Concepts Demonstrated
 
